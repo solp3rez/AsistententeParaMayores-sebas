@@ -11,14 +11,12 @@ USUARIO = os.getenv("MQTT_USER")
 CLAVE = os.getenv("MQTT_PASS")
 
 # --- Topics ---
-TOPIC_MENSAJE = "prueba"       # llega el texto que hay que decir en voz alta
-TOPIC_PARAR = "prueba/parar"   # frena la reproducción
-TOPIC_SOS = "prueba/sos"       # lo publica el botón SOS (distinto de TOPIC_MENSAJE
-                               # para que la Pi no se lea a sí misma el SOS)
+TOPIC_MENSAJE = "prueba"       
+TOPIC_PARAR = "prueba/parar"   
+TOPIC_SOS = "prueba/sos"                                      
 
-# --- Botones físicos (numeración BCM, no el número de pin de la placa) ---
-PIN_SOS = 20   # pin físico 11
-PIN_PARAR = 21   # pin físico 13
+PIN_SOS = 20   
+PIN_PARAR = 21  
 # El otro extremo de cada botón va a GND (pin físico 9, 14, 20...).
 # Se usa la resistencia pull-up interna, no hace falta resistencia externa.
 

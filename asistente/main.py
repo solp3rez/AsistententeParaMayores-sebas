@@ -32,8 +32,7 @@ def on_message(client, userdata, msg):
         if not texto:
             return
         print("Recibido:", texto)
-        if not locutor.iniciar(texto):
-            print("Ya hay un mensaje sonando, se ignora el nuevo")
+        locutor.agregar(texto)
 
 
 def main():
