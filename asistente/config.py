@@ -17,8 +17,8 @@ TOPIC_SOS = "prueba/sos"       # lo publica el botón SOS (distinto de TOPIC_MEN
                                # para que la Pi no se lea a sí misma el SOS)
 
 # --- Botones físicos (numeración BCM, no el número de pin de la placa) ---
-PIN_SOS = 17     # pin físico 11
-PIN_PARAR = 27   # pin físico 13
+PIN_SOS = 20   # pin físico 11
+PIN_PARAR = 21   # pin físico 13
 # El otro extremo de cada botón va a GND (pin físico 9, 14, 20...).
 # Se usa la resistencia pull-up interna, no hace falta resistencia externa.
 
