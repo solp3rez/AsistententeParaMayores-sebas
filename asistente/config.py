@@ -8,7 +8,6 @@ PORT = int(os.getenv("MQTT_PORT", "1883"))
 USUARIO = os.getenv("MQTT_USER")
 CLAVE = os.getenv("MQTT_PASS")
 
-# --- Topics ---
 TOPIC_MENSAJE = "prueba"       
 TOPIC_PARAR = "prueba/parar"   
 TOPIC_SOS = "prueba/sos"                                      
