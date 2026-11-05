@@ -2,11 +2,9 @@
 import os
 
 # --- Servidor MQTT ---
-BROKER = os.getenv("MQTT_BROKER", "10.56.2.30")
+BROKER = os.getenv("MQTT_BROKER", "10.56.31.45")
 PORT = int(os.getenv("MQTT_PORT", "1883"))
 
-# Si el broker pide usuario y clave, se definen como variables de entorno
-# (ver INSTALAR.md, archivo /etc/asistente.env). Nunca los escribas en el código.
 USUARIO = os.getenv("MQTT_USER")
 CLAVE = os.getenv("MQTT_PASS")
 
