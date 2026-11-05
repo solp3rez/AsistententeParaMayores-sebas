@@ -1,7 +1,9 @@
-"""Locutor: lee mensajes en voz alta y guarda los que van llegando en una casilla."""
 import subprocess
 import threading
 import time
+import hashlib
+import os
+from gtts import gTTS
 
 
 class Locutor:
@@ -28,29 +30,44 @@ class Locutor:
             self.proceso.terminate()
 
     def _trabajar(self):
-        """Se repite para siempre: toma un mensaje de la casilla y lo dice."""
         while True:
-            # Si no suena nada y hay mensajes guardados, tomar el primero
             if self.mensaje_actual is None and self.cola:
                 self.mensaje_actual = self.cola.pop(0)
 
             texto = self.mensaje_actual
             if texto is None:
-                time.sleep(0.2)       # no hay nada que decir, esperar un momento
+                time.sleep(0.2)       
             else:
                 self._decir(texto)    # decirlo una vez
                 time.sleep(self.pausa)  # y repetirlo, hasta que lo paren
 
     def _decir(self, texto):
+        """Reproduce el mensaje con mpg123 y espera a que termine de hablar."""
+        archivo = self._preparar_audio(texto)
+        if archivo is None:
+            self.mensaje_actual = None
+            return
+
         try:
-            self.proceso = subprocess.Popen(["espeak-ng", "-v", self.voz, texto])
+            self.proceso = subprocess.Popen(["mpg123", "-q", archivo])
         except FileNotFoundError:
-            print("Falta instalar espeak-ng: sudo apt install espeak-ng")
+            print("Falta instalar mpg123: sudo apt install mpg123")
             self.mensaje_actual = None
             return
 
         # Si justo mientras arrancaba llegó "parar", cortarlo de inmediato
         if self.mensaje_actual is not texto:
-            self.proceso.terminate()
+            self._cortar_voz()
 
-        self.proceso.wait()  # esperar a que termine de hablar
+        self.proceso.wait()
+
+    def _preparar_audio(self, texto):
+        """Convierte el texto en un mp3 (una sola vez por mensaje) y devuelve su ruta."""
+        archivo = f"/tmp/{hashlib.md5(texto.encode()).hexdigest()}.mp3"
+        if not os.path.exists(archivo):
+            try:
+                gTTS(texto, lang="es", tld="com.ar").save(archivo)
+            except Exception as e:
+                print(f"No se pudo generar la voz (¿hay internet?): {e}")
+                return None
+        return archivo
