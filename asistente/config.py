@@ -1,7 +1,5 @@
-"""Configuración central: lo que cambia de una instalación a otra va acá."""
 import os
 
-# --- Servidor MQTT ---
 BROKER = os.getenv("MQTT_BROKER", "10.56.31.45")
 PORT = int(os.getenv("MQTT_PORT", "1883"))
 
@@ -14,9 +12,6 @@ TOPIC_SOS = "prueba/sos"
 
 PIN_SOS = 20   
 PIN_PARAR = 21  
-# El otro extremo de cada botón va a GND (pin físico 9, 14, 20...).
-# Se usa la resistencia pull-up interna, no hace falta resistencia externa.
 
-# --- Voz ---
 VOZ = "es"
-PAUSA_ENTRE_REPETICIONES = 1.0  # segundos
+PAUSA_ENTRE_REPETICIONES = 5.0 
