@@ -1,0 +1,14 @@
+[Unit]
+Description=CERCA - mensajes
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+User=superleonardo3
+WorkingDirectory=/home/superleonardo3/cerca-alertas
+ExecStart=/home/superleonardo3/cerca-alertas/.venv/bin/python -u /home/superleonardo3/cerca-alertas/enviar_mensajes.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
