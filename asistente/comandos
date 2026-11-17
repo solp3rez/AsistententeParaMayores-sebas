@@ -1,7 +1,0 @@
-mosquitto_sub -h 10.56.31.11 -p 1883 -t prueba -v 
-
-
-source /home/etec/Imágenes/venv/bin/activate
-
-para correr la raspberry hay que mandar en la terminal en mi proyecto 
-python3 asistente/main.py
